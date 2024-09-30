@@ -45,7 +45,7 @@ export default {
       try {
         this.isLoading = !this.isLoading;
         const data = {
-          is_loading: this.isLoading,
+          "is_loading": this.isLoading,
         };
 
         const resp = await axios.post(
