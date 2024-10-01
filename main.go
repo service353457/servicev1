@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/tls"
+	"log"
 	"net/http"
 	"time"
 
@@ -31,7 +33,17 @@ func main() {
 
 	router.GET("/checkstatus", checkstatus)
 	router.POST("/changestatus", changestatus)
-	router.Run(":8089")
+	tlsConfig := &tls.Config{
+		MinVersion: tls.VersionTLS12,
+		MaxVersion: tls.VersionTLS13,
+	}
+	server := &http.Server{
+		Addr:      ":8089",
+		Handler:   router,
+		TLSConfig: tlsConfig,
+	}
+
+	log.Fatal(server.ListenAndServe())
 }
 
 func checkstatus(c *gin.Context) {
