@@ -38,7 +38,7 @@ func main() {
 		MaxVersion: tls.VersionTLS13,
 	}
 	server := &http.Server{
-		Addr:      ":8089",
+		Addr:      ":443",
 		Handler:   router,
 		TLSConfig: tlsConfig,
 	}
